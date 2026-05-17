@@ -7,26 +7,30 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
+BUILD_OUTPUT_NAME="${BUILD_OUTPUT_NAME:-AudreyHoughton}"
 SOURCE_TEX="${SOURCE_TEX:-${ROOT_DIR}/main.tex}"
-SOURCE_PDF="${SOURCE_PDF:-${ROOT_DIR}/main.pdf}"
+SOURCE_PDF="${SOURCE_PDF:-${ROOT_DIR}/${BUILD_OUTPUT_NAME}.pdf}"
 TARGET_REPO_URL="${TARGET_REPO_URL:-git@github.com:audreymhoughton/audreymhoughton.git}"
 TARGET_BRANCH="${TARGET_BRANCH:-main}"
 TARGET_FILE_PATH="${TARGET_FILE_PATH:-}"
 COMMIT_MESSAGE="${COMMIT_MESSAGE:-Update resume PDF}"
-BUILD_RESUME="${BUILD_RESUME:-1}"
+BUILD_RESUME="${BUILD_RESUME:-0}"
 
 detect_target_file_path() {
   local repo_dir="$1"
   local explicit_target_path="$2"
-  local found_pdf_paths
+  local -a found_pdf_paths=()
   local found_count
+  local line
 
   if [[ -n "${explicit_target_path}" ]]; then
     echo "${explicit_target_path}"
     return 0
   fi
 
-  mapfile -t found_pdf_paths < <(cd "${repo_dir}" && git ls-files "*.pdf")
+  while IFS= read -r line; do
+    [[ -n "${line}" ]] && found_pdf_paths+=("${line}")
+  done < <(cd "${repo_dir}" && git ls-files "*.pdf")
   found_count="${#found_pdf_paths[@]}"
 
   if [[ "${found_count}" -eq 1 ]]; then
@@ -63,9 +67,10 @@ Optional environment variables:
                     If unset, auto-detects existing tracked PDF filename;
                     falls back to resume.pdf when none exists.
   COMMIT_MESSAGE    Commit message for sync commit
-  BUILD_RESUME      1 to run latex build first, 0 to skip
+  BUILD_RESUME      1 to run latex build first, 0 to skip (default: 0)
+  BUILD_OUTPUT_NAME Build output filename without extension (default: AudreyHoughton)
   SOURCE_TEX        Path to source .tex file (default: ./main.tex)
-  SOURCE_PDF        Path to source .pdf file (default: ./main.pdf)
+  SOURCE_PDF        Path to source .pdf file (default: ./AudreyHoughton.pdf)
 EOF
 }
 
@@ -79,7 +84,7 @@ require_command latexmk
 
 if [[ "${BUILD_RESUME}" == "1" ]]; then
   echo "Building resume PDF from ${SOURCE_TEX}..."
-  latexmk -pdf -interaction=nonstopmode "${SOURCE_TEX}"
+  latexmk -pdf -interaction=nonstopmode -jobname="${BUILD_OUTPUT_NAME}" "${SOURCE_TEX}"
 fi
 
 if [[ ! -f "${SOURCE_PDF}" ]]; then

@@ -8,7 +8,7 @@ bash scripts/sync-profile-resume.sh
 
 This will:
 
-1. Build `main.pdf` from `main.tex`
+1. Build `AudreyHoughton.pdf` from `main.tex`
 2. Clone your profile repo in a temporary folder
 3. Copy the PDF to the existing tracked PDF path in that repo (or `resume.pdf` if none exists)
 4. Commit and push if there is a change
@@ -21,6 +21,7 @@ TARGET_BRANCH=main \
 TARGET_FILE_PATH=resume.pdf \
 COMMIT_MESSAGE="Update resume" \
 BUILD_RESUME=1 \
+BUILD_OUTPUT_NAME=AudreyHoughton \
 bash scripts/sync-profile-resume.sh
 ```
 
@@ -32,3 +33,5 @@ If there are multiple tracked PDFs, it will stop and ask you to set `TARGET_FILE
 ```bash
 BUILD_RESUME=0 bash scripts/sync-profile-resume.sh
 ```
+
+By default, the script expects `AudreyHoughton.pdf` as the local source PDF.
