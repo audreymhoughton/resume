@@ -6,9 +6,9 @@ Run this from the resume repository root:
 bash scripts/sync-profile-resume.sh
 ```
 
-This will:
+By default, this will:
 
-1. Build `AudreyHoughton.pdf` from `main.tex`
+1. Use the existing local latest `AudreyHoughton_*.pdf` (no rebuild)
 2. Clone your profile repo in a temporary folder
 3. Copy the PDF to the existing tracked PDF path in that repo (or `resume.pdf` if none exists)
 4. Commit and push if there is a change
@@ -26,12 +26,22 @@ bash scripts/sync-profile-resume.sh
 ```
 
 If `TARGET_FILE_PATH` is omitted, the script auto-detects the existing tracked PDF filename in the target repo.
-If there are multiple tracked PDFs, it will stop and ask you to set `TARGET_FILE_PATH` explicitly.
+If there are multiple tracked PDFs, it stops and asks you to set `TARGET_FILE_PATH` explicitly.
 
-## Skip LaTeX build
+## Rebuild Before Sync (Optional)
+
+```bash
+BUILD_RESUME=1 bash scripts/sync-profile-resume.sh
+```
+
+When rebuilding, output is date-stamped by default, for example:
+
+`AudreyHoughton_05172026.pdf`
+
+This behavior is controlled by the repository's `.latexmkrc`.
+
+## Skip Build (Default)
 
 ```bash
 BUILD_RESUME=0 bash scripts/sync-profile-resume.sh
 ```
-
-By default, the script expects `AudreyHoughton.pdf` as the local source PDF.

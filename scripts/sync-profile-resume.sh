@@ -9,12 +9,38 @@ ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 BUILD_OUTPUT_NAME="${BUILD_OUTPUT_NAME:-AudreyHoughton}"
 SOURCE_TEX="${SOURCE_TEX:-${ROOT_DIR}/main.tex}"
-SOURCE_PDF="${SOURCE_PDF:-${ROOT_DIR}/${BUILD_OUTPUT_NAME}.pdf}"
+SOURCE_PDF="${SOURCE_PDF:-}"
 TARGET_REPO_URL="${TARGET_REPO_URL:-git@github.com:audreymhoughton/audreymhoughton.git}"
 TARGET_BRANCH="${TARGET_BRANCH:-main}"
 TARGET_FILE_PATH="${TARGET_FILE_PATH:-}"
 COMMIT_MESSAGE="${COMMIT_MESSAGE:-Update resume PDF}"
 BUILD_RESUME="${BUILD_RESUME:-0}"
+
+detect_source_pdf() {
+  local explicit_source_pdf="$1"
+  local latest_pdf=""
+  local pdf
+
+  if [[ -n "${explicit_source_pdf}" ]]; then
+    echo "${explicit_source_pdf}"
+    return 0
+  fi
+
+  shopt -s nullglob
+  for pdf in "${ROOT_DIR}/${BUILD_OUTPUT_NAME}"_*.pdf; do
+    if [[ -z "${latest_pdf}" || "${pdf}" -nt "${latest_pdf}" ]]; then
+      latest_pdf="${pdf}"
+    fi
+  done
+  shopt -u nullglob
+
+  if [[ -n "${latest_pdf}" ]]; then
+    echo "${latest_pdf}"
+    return 0
+  fi
+
+  echo "${ROOT_DIR}/${BUILD_OUTPUT_NAME}.pdf"
+}
 
 detect_target_file_path() {
   local repo_dir="$1"
@@ -70,7 +96,7 @@ Optional environment variables:
   BUILD_RESUME      1 to run latex build first, 0 to skip (default: 0)
   BUILD_OUTPUT_NAME Build output filename without extension (default: AudreyHoughton)
   SOURCE_TEX        Path to source .tex file (default: ./main.tex)
-  SOURCE_PDF        Path to source .pdf file (default: ./AudreyHoughton.pdf)
+  SOURCE_PDF        Path to source .pdf file (default: latest ./AudreyHoughton_*.pdf)
 EOF
 }
 
@@ -82,9 +108,22 @@ fi
 require_command git
 require_command latexmk
 
+source_pdf_is_explicit=0
+if [[ -n "${SOURCE_PDF}" ]]; then
+  source_pdf_is_explicit=1
+fi
+
 if [[ "${BUILD_RESUME}" == "1" ]]; then
   echo "Building resume PDF from ${SOURCE_TEX}..."
-  latexmk -pdf -interaction=nonstopmode -jobname="${BUILD_OUTPUT_NAME}" "${SOURCE_TEX}"
+  latexmk -pdf -interaction=nonstopmode "${SOURCE_TEX}"
+
+  if [[ "${source_pdf_is_explicit}" == "0" ]]; then
+    SOURCE_PDF="$(detect_source_pdf "")"
+  fi
+fi
+
+if [[ -z "${SOURCE_PDF}" ]]; then
+  SOURCE_PDF="$(detect_source_pdf "")"
 fi
 
 if [[ ! -f "${SOURCE_PDF}" ]]; then
