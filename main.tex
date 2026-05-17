@@ -1,0 +1,430 @@
+%-------------------------
+% Resume in Latex
+% Author : Tejas Khairnar
+%------------------------
+
+%---- Required Packages and Functions ----
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{cfr-lm}
+\usepackage[T1]{fontenc}
+\usepackage{fontawesome}
+\usepackage[most]{tcolorbox}
+\usepackage{makecell}
+\usepackage{arydshln}
+
+
+% Set the margins
+\geometry{left=0.85cm, top=0.8cm, right=0.85cm, bottom=0.2cm}
+
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+
+%-------------------------
+% Custom commands
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item[]
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \hspace{-3mm}{#1}:\hspace{1mm} & \hspace*{0pt}\hfill{\footnotesize{ #3}} \vspace{-0.5mm}\\ \hspace{-2.9mm}#2 
+    \end{tabular*}
+    \vspace{0mm}
+}
+
+\newcommand{\resumeExp}[4]{
+\vspace{2mm}\item[]
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \hspace{-4.4mm} \textbf{#1} \vspace{0mm} & {\footnotesize\emph{#3}}\vspace{0mm}\\
+        \hspace{-4.3mm} \footnotesize{\text{#2}} \vspace{2mm} &\footnotesize{#4}
+    \end{tabular*}
+    \vspace{-6.1mm}
+}
+
+
+\newcommand{\resumeProject}[4]{
+\vspace{3mm}\item[]
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \hspace{-4.4mm} \small\textbf{#1} \vspace{0mm} & {\footnotesize{#3}}\vspace{-1mm}\\
+        \hspace{-4.3mm} \footnotesize{\text{#2}}\vspace{2mm} & \footnotesize{#4} \vspace{0mm}
+    \end{tabular*}
+    \vspace{-6mm}
+}
+
+\newcommand{\resumeEdu}[4]{
+\vspace{0mm}\item[]
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \hspace{-4.3mm} \small\textbf{#1} & \footnotesize{#3}\vspace{-1mm} \\
+        \hspace{-4.3mm} \footnotesize{#2} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-3.2mm}
+}
+
+\newcommand{\resumeAchieve}[3]
+{
+\hspace{-3.1mm}\textbf{ #1} & {#2} & \hspace{3mm}\footnotesize{#3}
+\vspace{0mm}\\
+}
+
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=0mm,itemsep=-2.5mm]}
+
+\newcommand{\resumeItemListStart}{\begin{justify}\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]\small}
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\end{justify}\vspace{-1.5mm}}
+
+\renewcommand{\arraystretch}{1}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+%---- End of Packages and Functions ------
+
+
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%
+
+\newcommand{\name}{Audrey Houghton (she/her)} % Your Name
+\newcommand{\course}{} % Your Course
+\newcommand{\roll}{xxxxxxxx} % Your Roll No.
+\newcommand{\phone}{612-462-1481} % Your Phone Number
+\newcommand{\emaila}{audreymhoughton@gmail.com} %Email 1
+\newcommand{\github}{audreymhoughton} %Github
+\newcommand{\website}{https://example.com} %Website
+\newcommand{\linkedin}{audreyhoughton} %linkedin
+\usepackage{academicons}
+
+
+
+\begin{document}
+\fontfamily{cmr}\selectfont
+
+%----------HEADING-----------------
+\begin{center}
+    \LARGE{\textbf{\name}}
+\end{center}
+\vspace{-5mm}
+\begin{center}
+    \small{\href{https://github.com/\github}{\faGithub \hspace{0.2mm} github.com/audreymhoughton} |  \href{https://www.linkedin.com/in/\linkedin/}{\faLinkedinSquare \hspace{0.2mm} linkedin.com/in/audreyhoughton} | \href{mailto:\emaila}{\faSend \hspace{0.2mm} \emaila} \\
+    \faPhone \hspace{0.2mm} +1-\phone } | \href{https://scholar.google.com/citations?hl=en&user=ik59nO0AAAAJ&view}{\faGraduationCap Google Scholar}
+\end{center}
+\vspace{-6mm}
+
+\section{Technical Skills}
+
+\hspace{0mm}\small\textbf{Software} \vspace{-7mm} \\ 
+\resumeItemListStart
+\item[]{} Proficient with Python, UNIX/Linux, GitHub, LaTeX, EMACS, VSCode, Singularity, Docker, and virtual environments. Familiar with Matlab, R, IDL, JavaScript, Node.js, npm, Go, Ansible, AWX, RedHat, ReadTheDocs, and Google Apps Script (via clasp). Knowledgeable in CI/CD pipelines (e.g., CircleCI, GitHub Actions) and deep learning AI (nnU-Net). Applied skills in DevOps, data engineering, and software engineering roles.
+\resumeItemListEnd
+
+\hspace{-6mm}\small\textbf{Data} \vspace{-7mm} \\ 
+\resumeItemListStart
+\item[]{} Proficient in high-performance computing and data systems, including AWS (S3), Ceph, SLURM, Kubernetes, Globus, Grafana, and Prometheus. Experienced in ETL-based data warehousing, batch processing, SQL querying, and testing and validation of data pipelines. Skilled in statistical analysis, benchmarking, causal inference, predictive modeling, GIS-based spatial analysis, and electronic health record (EHR) data integration. Experienced in automation workflows including Salesforce API integration, Microsoft Teams automation, and compliant web scraping practices.
+
+
+\resumeItemListEnd
+
+\hspace{-6mm}\small\textbf{Product Management}\vspace{-7mm} \\ 
+\resumeItemListStart
+\item[]{} Proficient in cross-functional and customer communication, Kanban boards, Jira, and documenting SOPs, methodologies, terminology, and codebases. Experienced with MVP development life cycles and familiar with Agile and Scrum frameworks. Applied business process automation to improve sales and reporting workflows.
+\resumeItemListEnd
+
+
+\vspace{0mm}
+%-----------EXPERIENCE-----------------
+\section{Experience}
+\resumeSubHeadingListStart
+
+
+\resumeExp
+{University of Minnesota – Department of Psychiatry \& Behavioral Sciences}
+{Research Professional III}
+{Dec 2025 - Present}
+{Minneapolis, MN (Remote)}
+\resumeItemListStart
+\item[$\bullet$] Develop and maintain statistical and computational analysis pipelines for GIS-linked electronic health record data
+\item[$\bullet$] Implement causal inference, predictive modeling, and machine learning workflows in Python, R, and JavaScript
+\item[$\bullet$] Write and interpret results for publications and grant mechanisms, serving as a data and methods resource for an interdisciplinary research team
+
+
+\resumeItemListEnd
+
+\resumeExp
+{CoreWeave, Inc.}
+{Fleet Operations Engineer}
+{Apr 2024 - Sept 2024}
+{Remote}
+\resumeItemListStart
+\item[$\bullet$] Provisioned and maintained thousands of NVIDIA GPU nodes in Kubernetes clusters using Ansible, AWX, Grafana, and Go, achieving onboarding timelines of 1–2 weeks with 6+ months average production uptime
+\item[$\bullet$] Diagnosed and resolved hardware/software issues across the node lifecycle, saving approximately \$250,000 per node repaired
+\item[$\bullet$] Partnered with 10+ teams—including networking, hardware, operations, and support—to streamline troubleshooting, accelerate incident resolution, and document SOPs and post-mortems, improving efficiency and reliability
+\item[$\bullet$] Identified points in the node lifecycle where nodes were lost, implementing solutions that saved the company millions in revenue
+\resumeItemListEnd
+
+
+\resumeExp
+{Masonic Institute of the Developing Brain}
+{Research Professional II $\rightarrow$ Research Professional III}
+{Jan 2021 - Apr 2024}
+{Minneapolis, MN (Remote)}
+\resumeItemListStart
+\item[$\bullet$] Developed Python wrappers leveraging AWS S3 storage and SLURM optimization to accelerate image processing up to 12x
+\item[$\bullet$] Engineered a containerized infant MRI segmentation application with deep learning models, achieving 600x speed-ups and +53\% accuracy
+\item[$\bullet$] Built ETL-based pipelines to transfer and process petabytes of imaging data 10x faster than prior industry benchmarks, incorporating statistical error analysis and validation to ensure reliability and reproducibility
+\item[$\bullet$] Authored comprehensive documentation and curriculum, setting standards for reproducible neuroimaging data processing
+\resumeItemListEnd
+
+
+
+\resumeExp
+{Calyxt}
+{Laboratory Assistant \& Data Specialist}
+{Oct 2019 - Aug 2020}
+{Roseville, MN}
+\resumeItemListStart
+\item[$\bullet$]  Developed Python scripts for comprehensive data tracking and analysis methods
+\resumeItemListEnd
+
+\resumeExp
+{Huntington Learning Center}
+{Mathematics Instructor}
+{Aug 2019 - Oct 2019}
+{Plymouth, MN}
+\vspace{4mm}
+
+
+\resumeExp
+{Tutor Doctor}
+{Mathematics Instructor}
+{Jan 2019 - Jun 2019}
+{Loveland, Colorado}
+\vspace{4mm}
+
+\resumeExp
+{Waste Not, LLC.}
+{Data Manager and CEO}
+{Est. 2018}
+{}
+\vspace{4mm}
+
+\resumeExp
+{Amazon}
+{Data Entry Associate}
+{Jul 2018 - Aug 2018}
+{Seattle, WA}
+\vspace{4mm}
+
+\newpage
+
+\resumeExp
+{Imagine Prep at Surprise}
+{Mathematics Instructor}
+{Jul 2017 - Jul 2018}
+{Surprise, AZ}
+\vspace{4mm}
+
+
+
+\resumeExp
+{The MINVERA Project}
+{Research Assistant}
+{Jan 2015 - May 2017}
+{Missoula, MT}
+\resumeItemListStart
+\item[$\bullet$] Developed a data reduction pipeline for time-domain imaging data written in Python
+\resumeItemListEnd
+
+\resumeExp
+{Rutgers University Astrophysics Department}
+{Research Assistant}
+{May 2016 - Aug 2016}
+{New Brunswick, NJ}
+\resumeItemListStart
+\item[$\bullet$] Refactored IDL scripts into Python
+\item[$\bullet$] Generated models for galactic simulations through parameter optimization
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{0mm}
+
+
+%-----------PROJECTS-----------------
+\section{Products}
+\resumeSubHeadingListStart
+
+\resumeProject
+{Sales Summary Project} 
+{Automation Pipeline for Lead Generation \& Sales Tracking [Proprietary]} 
+{2025} 
+{}
+\resumeItemListStart
+\item[$\bullet$] Designed a proof-of-concept pipeline integrating Salesforce logging, CSV rotation, and Microsoft Teams alerts
+\item[$\bullet$] Implemented compliant web scraping (robots.txt, throttling, retries) to demonstrate reliable, ethical data collection for potential enterprise use
+\resumeItemListEnd
+
+
+\resumeProject
+{JavaScript Excel Sheet App} 
+{Google Apps Script Utility for Dynamic Links [Personal]} 
+{2025} 
+{}
+\resumeItemListStart
+\item[$\bullet$] Built a Google Sheets App Script to dynamically generate links, clean outdated entries, and trigger updates in real time
+\item[$\bullet$] Reduced personal job application tracking effort by automating link formatting and updates; version-controlled with GitHub using clasp, Node.js, and npm
+\resumeItemListEnd
+
+
+
+\resumeProject
+{CoreWeave Internal Documentation} 
+{CoreWeave, Inc.} 
+{2024} 
+{}
+\resumeItemListStart
+\item[$\bullet$] Initiated and built company-wide documentation from the ground up, replacing scattered one-off documents with an organized, centralized Notion knowledge base covering terminology, SOPs, and team workflows
+\resumeItemListEnd
+
+
+\resumeProject
+{SLURM Wrappers} 
+{High-Performance Computing S3 and Disk SLURM-Compliant Wrappers} 
+{2021 - 2024} 
+{\href{https://github.com/DCAN-Labs/SLURM_wrappers}{github.com/DCAN-Labs/SLURM\_wrappers}}
+\resumeItemListStart
+\item[$\bullet$] Bash/Python wrappers adaptable to any SLURM-based data pipeline
+\resumeItemListEnd
+
+\resumeProject
+{ABCD Study Collection 3165 Data Processing} 
+{NIH Data Archive (NDA)} 
+{2021 - 2024} 
+{\href{https://collection3165.readthedocs.io/en/stable/}{collection3165.readthedocs.io}}
+\resumeItemListStart
+\item[$\bullet$] Community dataset enabling access to petabytes of processed/unprocessed MRI data under BIDS standards
+\resumeItemListEnd
+
+
+\resumeProject
+{DCAN Labs Informational Guide} %Project Name
+{Minnesota Supercomputing Institute Data Engineering Documentation} %Project Name, Location Name
+{2022 - 2024} %Event Dates
+{\href{https://dcan-labs-informational-guide.readthedocs.io/en/latest/}{dcan-labs-informational-guide.readthedocs.io}} %Website
+\resumeItemListStart
+\item[$\bullet$] Comprehensive, continually-supported documentation of usage of the Minnesota Supercomputing Institute to process, analyze, and transfer MRI data
+\resumeItemListEnd
+
+\resumeProject
+{CABINET} %Project Name
+{Container-Linking Wrapper} %Project Name, Location Name
+{2022 - 2023} %Event Dates
+{\href{https://github.com/DCAN-Labs/CABINET}{github.com/DCAN-Labs/CABINET}} %Website
+\resumeItemListStart
+\item[$\bullet$] Python-based universal container-linking wrapper employing FAIR principles
+\resumeItemListEnd
+
+
+\resumeProject
+{BIBSNet} 
+{Infant MRI Brain Segmentation Application} 
+{2022 - 2023} 
+{\href{https://github.com/DCAN-Labs/BIBSnet}{github.com/DCAN-Labs/BIBSnet}}
+\resumeItemListStart
+\item[$\bullet$] Containerized infant MRI application; achieved 600x faster processing and +53\% accuracy
+\resumeItemListEnd
+
+
+
+\resumeProject
+{Data Processing Workshop} %Project Name
+{Minnesota Supercomputing Institute (MSI) Data Processing Workshop} %Project Name, Location Name
+{2022} %Event Dates
+{\href{http://tinyurl.com/MRIsyllabus}{tinyurl.com/MRIsyllabus}} %Website
+\resumeItemListStart
+\item[$\bullet$] An extensive all-levels MSI data processing workshop
+\item[$\bullet$] Used as a template for a University neuroscience course at the University of Minnesota
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+
+
+%\section{Papers}
+%\vspace{0.2mm}
+%\small{\begin{tabular*}{\textwidth}[t]{p{0.22\textwidth} p{0.68\textwidth}@{\extracolsep{\fill}}r}
+
+
+%\resumeAchieve{Achivement 1}{Description}{2022}
+
+%\resumeAchieve{Achivement 2}{Description}{2022}
+
+%\resumeAchieve{Achivement 3}{Description}{2022}
+
+%\resumeAchieve{Achivement 4}{Description}{2022}
+
+%\end{tabular*}}
+
+%\vspace{-2.5mm}
+
+
+
+%-----------EDUCATION-----------------
+
+\vspace{0mm}
+\section{Education}
+
+\resumeSubHeadingListStart
+\resumeEdu
+{University of Montana - Missoula, MT} 
+{Bachelors of Arts in Physics} 
+{Aug 2013 - May 2017} 
+{\href{https://www.umt.edu/physics-astronomy/}{umt.edu/physics-astronomy}}
+\resumeSubHeadingListEnd
+\vspace{0mm}
+
+\resumeSubHeadingListStart
+\resumeEdu
+{University of Minnesota} 
+{Data Management Series} 
+{Fall 2023} 
+{\href{https://libguides.umn.edu/datamanagement/dmbootcamp}{libguides.umn.edu/datamanagement/dmbootcamp}}
+\resumeSubHeadingListEnd
+\vspace{-2mm}
+
+\resumeSubHeadingListStart
+\resumeEdu
+{University of Minnesota} 
+{Project Management Certificate Coursework (In Progress)} 
+{2023} 
+{\href{https://ccaps.umn.edu/project-management-certificate}{ccaps.umn.edu/project-management-certificate}}
+\resumeSubHeadingListEnd
+\hspace{4mm}{\footnotesize \textit{Completed modules: Foundations, Execution \& Monitoring, Leadership, Team Communication}}
+
+\vspace{-4mm}
+
+%-------------------------------------------
+\end{document}
+
