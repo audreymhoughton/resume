@@ -12,7 +12,7 @@ SOURCE_TEX="${SOURCE_TEX:-${ROOT_DIR}/main.tex}"
 SOURCE_PDF="${SOURCE_PDF:-}"
 TARGET_REPO_URL="${TARGET_REPO_URL:-git@github.com:audreymhoughton/audreymhoughton.git}"
 TARGET_BRANCH="${TARGET_BRANCH:-main}"
-TARGET_FILE_PATH="${TARGET_FILE_PATH:-}"
+TARGET_FILE_PATH="${TARGET_FILE_PATH:-AudreyHoughton_resume.pdf}"
 COMMIT_MESSAGE="${COMMIT_MESSAGE:-Update resume PDF}"
 BUILD_RESUME="${BUILD_RESUME:-0}"
 
@@ -42,38 +42,6 @@ detect_source_pdf() {
   echo "${ROOT_DIR}/${BUILD_OUTPUT_NAME}.pdf"
 }
 
-detect_target_file_path() {
-  local repo_dir="$1"
-  local explicit_target_path="$2"
-  local -a found_pdf_paths=()
-  local found_count
-  local line
-
-  if [[ -n "${explicit_target_path}" ]]; then
-    echo "${explicit_target_path}"
-    return 0
-  fi
-
-  while IFS= read -r line; do
-    [[ -n "${line}" ]] && found_pdf_paths+=("${line}")
-  done < <(cd "${repo_dir}" && git ls-files "*.pdf")
-  found_count="${#found_pdf_paths[@]}"
-
-  if [[ "${found_count}" -eq 1 ]]; then
-    echo "${found_pdf_paths[0]}"
-    return 0
-  fi
-
-  if [[ "${found_count}" -gt 1 ]]; then
-    echo "Error: multiple tracked PDFs found in target repo. Set TARGET_FILE_PATH explicitly." >&2
-    printf 'Found PDFs:\n' >&2
-    printf '  - %s\n' "${found_pdf_paths[@]}" >&2
-    exit 1
-  fi
-
-  echo "resume.pdf"
-}
-
 require_command() {
   if ! command -v "$1" >/dev/null 2>&1; then
     echo "Error: required command '$1' is not installed." >&2
@@ -89,9 +57,7 @@ Usage:
 Optional environment variables:
   TARGET_REPO_URL   Git URL for destination repository
   TARGET_BRANCH     Branch to push to (default: main)
-  TARGET_FILE_PATH  Path inside destination repo for PDF.
-                    If unset, auto-detects existing tracked PDF filename;
-                    falls back to resume.pdf when none exists.
+  TARGET_FILE_PATH  Path inside destination repo for PDF (default: AudreyHoughton_resume.pdf)
   COMMIT_MESSAGE    Commit message for sync commit
   BUILD_RESUME      1 to run latex build first, 0 to skip (default: 0)
   BUILD_OUTPUT_NAME Build output filename without extension (default: AudreyHoughton)
@@ -140,7 +106,6 @@ trap cleanup EXIT
 echo "Cloning target repository into temporary directory..."
 git clone --branch "${TARGET_BRANCH}" --depth 1 "${TARGET_REPO_URL}" "${tmp_dir}/target"
 
-TARGET_FILE_PATH="$(detect_target_file_path "${tmp_dir}/target" "${TARGET_FILE_PATH}")"
 echo "Syncing to target file path: ${TARGET_FILE_PATH}"
 
 mkdir -p "$(dirname "${tmp_dir}/target/${TARGET_FILE_PATH}")"
